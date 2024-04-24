@@ -16,7 +16,6 @@ import java.net.URLEncoder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequestDTO {
-
     @Builder.Default
     private int page = 1;
 
@@ -37,7 +36,6 @@ public class PageRequestDTO {
     public Pageable getPageable(String...props) {
         return PageRequest.of(this.page -1, this.size, Sort.by(props).descending());
     }
-
     private String link;
 
     public String getLink() {
@@ -65,7 +63,4 @@ public class PageRequestDTO {
 
         return link;
     }
-
-
-
 }

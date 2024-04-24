@@ -1,5 +1,6 @@
 package org.zerock.b01.service;
 
+
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.zerock.b01.dto.PageResponseDTO;
 @SpringBootTest
 @Log4j2
 public class BoardServiceTests {
-
     @Autowired
     private BoardService boardService;
 
@@ -30,6 +30,7 @@ public class BoardServiceTests {
 
         log.info("bno: " + bno);
     }
+
 
     @Test
     public void testModify() {
@@ -50,7 +51,7 @@ public class BoardServiceTests {
 
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .type("tcw")
-                .keyword("1")
+                .keyword("짬뽕")
                 .page(1)
                 .size(10)
                 .build();
@@ -60,7 +61,4 @@ public class BoardServiceTests {
         log.info(responseDTO);
 
     }
-
-
-
 }
