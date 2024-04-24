@@ -1,8 +1,8 @@
 package org.zerock.b01.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,17 +20,17 @@ import java.util.stream.Collectors;
 
 @Service
 @Log4j2
-@RequiredArgsConstructor
 @Transactional
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private final BoardRepository boardRepository;
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Override
     public Long register(BoardDTO boardDTO) {
-
         Board board = modelMapper.map(boardDTO, Board.class);
 
         Long bno = boardRepository.save(board).getBno();
@@ -40,7 +40,6 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardDTO readOne(Long bno) {
-
         Optional<Board> result = boardRepository.findById(bno);
 
         Board board = result.orElseThrow();
@@ -52,7 +51,6 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void modify(BoardDTO boardDTO) {
-
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
 
         Board board = result.orElseThrow();
@@ -60,31 +58,15 @@ public class BoardServiceImpl implements BoardService{
         board.change(boardDTO.getTitle(), boardDTO.getContent());
 
         boardRepository.save(board);
-
     }
 
     @Override
     public void remove(Long bno) {
-
         boardRepository.deleteById(bno);
-
     }
-
-//    @Override
-//    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
-//
-//        String[] types = pageRequestDTO.getTypes();
-//        String keyword = pageRequestDTO.getKeyword();
-//        Pageable pageable = pageRequestDTO.getPageable("bno");
-//
-//        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
-//
-//        return null;
-//    }
 
     @Override
     public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
-
         String[] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("bno");
@@ -100,8 +82,5 @@ public class BoardServiceImpl implements BoardService{
                 .dtoList(dtoList)
                 .total((int)result.getTotalElements())
                 .build();
-
     }
-
-
 }

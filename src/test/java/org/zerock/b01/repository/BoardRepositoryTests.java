@@ -23,16 +23,25 @@ public class BoardRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1,100).forEach(i -> {
-            Board board = Board.builder()
-                    .title("title..." +i)
-                    .content("content..." + i)
-                    .writer("user"+ (i % 10))
+//        IntStream.rangeClosed(1,100).forEach(i -> {
+//            Board board = Board.builder()
+//                    .title("title..." +i)
+//                    .content("content..." + i)
+//                    .writer("user"+ (i % 10))
+//                    .build();
+//
+//            Board result = boardRepository.save(board);
+//            log.info("BNO: " + result.getBno());
+//        });
+
+        Board board = Board.builder()
+                    .title("짬뽕 제목")
+                    .content("짬뽕 맛있다.")
+                    .writer("user1")
                     .build();
 
             Board result = boardRepository.save(board);
             log.info("BNO: " + result.getBno());
-        });
     }
 
     @Test
@@ -90,28 +99,30 @@ public class BoardRepositoryTests {
 
     }
 
+
     @Test
     public void testSearch1() {
 
-        //2 page order by bno desc
         Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
+       boardRepository.search1(pageable);
 
-        boardRepository.search1(pageable);
+
 
     }
 
+
     @Test
     public void testSearchAll() {
-
         String[] types = {"t","c","w"};
 
         String keyword = "1";
 
         Pageable pageable = PageRequest.of(0,10, Sort.by("bno").descending());
 
-        Page<Board> result = boardRepository.searchAll(types, keyword, pageable );
 
+        Page<Board> result = boardRepository.searchAll(types, keyword, pageable );
     }
+
 
     @Test
     public void testSearchAll2() {
@@ -137,6 +148,7 @@ public class BoardRepositoryTests {
         log.info(result.hasPrevious() +": " + result.hasNext());
 
         result.getContent().forEach(board -> log.info(board));
+
     }
 
 
