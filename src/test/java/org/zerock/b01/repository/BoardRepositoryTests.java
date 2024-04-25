@@ -34,9 +34,9 @@ public class BoardRepositoryTests {
 //            log.info("BNO: " + result.getBno());
 //        });
 
-        Board board = Board.builder()
-                    .title("짬뽕 제목")
-                    .content("짬뽕 맛있다.")
+        Board board = Board.builder().bno(100L)
+                    .title("title 100")
+                    .content("여기는 100번 게시글.")
                     .writer("user1")
                     .build();
 

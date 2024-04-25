@@ -15,7 +15,7 @@
                     Board Modify
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/board/modify}" method="post" id="f1">
+                    <form th:action="@{/board/modify}" method="post" id="form1">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Bno</span>
                             <input type="text" class="form-control" th:value="${dto.bno}" name="bno" readonly>
@@ -77,7 +77,7 @@
     }
 
     const link = [[${pageRequestDTO.getLink()}]]
-    const formObj = document.querySelector("#f1")
+    const formObj = document.querySelector("#form1")
 
     document.querySelector(".modBtn").addEventListener("click", function(e){
         e.preventDefault()
