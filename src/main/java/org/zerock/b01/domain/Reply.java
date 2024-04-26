@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Reply", indexes = {
+        @Index(name = "idx_reply_board_bno", columnList = "board_bno")
+})
 @Getter
 @Builder
 @NoArgsConstructor
@@ -18,4 +21,7 @@ public class Reply extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
+
+    private String replyText;
+    private String replyer;
 }
