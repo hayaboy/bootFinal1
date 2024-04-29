@@ -24,25 +24,25 @@ public class BoardRepositoryTests {
 
     @Test
     public void testInsert() {
-//        IntStream.rangeClosed(1,100).forEach(i -> {
-//            Board board = Board.builder()
-//                    .title("title..." +i)
-//                    .content("content..." + i)
-//                    .writer("user"+ (i % 10))
-//                    .build();
-//
-//            Board result = boardRepository.save(board);
-//            log.info("BNO: " + result.getBno());
-//        });
-
-        Board board = Board.builder().bno(100L)
-                    .title("title 100")
-                    .content("여기는 100번 게시글.")
-                    .writer("user1")
+        IntStream.rangeClosed(1,100).forEach(i -> {
+            Board board = Board.builder()
+                    .title("title..." +i)
+                    .content("content..." + i)
+                    .writer("user"+ (i % 10))
                     .build();
 
             Board result = boardRepository.save(board);
             log.info("BNO: " + result.getBno());
+        });
+
+//        Board board = Board.builder().bno(100L)
+//                    .title("title 100")
+//                    .content("여기는 100번 게시글.")
+//                    .writer("user1")
+//                    .build();
+//
+//            Board result = boardRepository.save(board);
+//            log.info("BNO: " + result.getBno());
     }
 
     @Test
